@@ -1,0 +1,9 @@
+data/*.json
+!data/temp/
+!data/videos/
+src/*.json
+!src/config.py
+__pycache__/
+*.pyc
+.mvenv/
+.env
