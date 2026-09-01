@@ -39,9 +39,8 @@ class DailyNewsPipeline:
                 self.ai_generator = None
         else:
             print("No GROQ_API_KEY set, using fallback mode")
-            # Create a basic fallback generator
-            from ai_generator import AIContentGenerator
-            # Would use fallback in production
+            # Fallback: set self.ai_generator to None (used in run() already)
+            self.ai_generator = None
     
     def run(self) -> dict:
         """Run the full pipeline."""
