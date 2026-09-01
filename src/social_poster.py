@@ -6,7 +6,7 @@ import json
 import urllib.request
 import urllib.parse
 from datetime import datetime, timezone
-from typing import Optional, List
+from typing import Optional, List, Dict
 from pathlib import Path
 
 from config import config
