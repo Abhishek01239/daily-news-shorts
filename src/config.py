@@ -139,6 +139,9 @@ class Config:
 
 # Global config instance
 config = Config()
-# FFmpeg binary path override (user-confirmed working binary)
-import imageio_ffmpeg
-CONFIG['ffmpeg_path'] = r'C:\Users\ASUS\ai-video\mvenv\lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe'
+# FFmpeg binary path override (user-confirmed working binary) — used by video_generator.py
+try:
+    import imageio_ffmpeg
+    config.video.ffmpeg_binary_path = r'C:\Users\ASUS\ai-video\mvenv\lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe'
+except ImportError:
+    config.video.ffmpeg_binary_path = r'C:\Users\ASUS\ai-video\mvenv\lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe'
