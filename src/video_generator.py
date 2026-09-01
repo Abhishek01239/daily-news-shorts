@@ -168,6 +168,10 @@ class ThumbnailGenerator:
         return self.generate_local_fallback(prompt, output_path, article)
 
 
+# Wire ffmpeg binary from user's working environment
+FFMPEG_BIN = r'C:\Users\ASUS\ai-video\mvenv\lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe'
+import os
+os.environ['FFMPEG_BINARY'] = FFMPEG_BIN if os.path.exists(FFMPEG_BIN) else 'ffmpeg'
 class VideoGenerator:
     """Generates news short videos."""
     

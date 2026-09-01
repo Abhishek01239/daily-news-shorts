@@ -139,3 +139,6 @@ class Config:
 
 # Global config instance
 config = Config()
+# FFmpeg binary path override (user-confirmed working binary)
+import imageio_ffmpeg
+CONFIG['ffmpeg_path'] = r'C:\Users\ASUS\ai-video\mvenv\lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe'
