@@ -10,7 +10,10 @@ from pathlib import Path
 from typing import Optional, List
 from dataclasses import dataclass
 
-import ffmpeg
+try:
+    import ffmpeg
+except ImportError:
+    ffmpeg = None  # fallback for environments where ffmpeg-python isn't installed
 from PIL import Image, ImageDraw, ImageFont
 
 from config import config
@@ -173,6 +176,8 @@ class VideoGenerator:
         self.video_count = 0
     
     def create_text_overlay_video(self, text: str, output_path: Path, duration: float = None) -> bool:
+        if ffmpeg is None:
+            raise ImportError('ffmpeg-python module not installed (requirements.txt needs to resolve properly)')
         """Create a video with text overlay using ffmpeg."""
         if duration is None:
             duration = config.video.duration_seconds
