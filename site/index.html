@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily News — Premium Edition</title>
+<meta name="description" content="Fresh daily news across India, World, Business, Technology, Sports, Science and Lifestyle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+:root{--bg:#0b0c15;--surface:#16162b;--surface-2:#1a1b30;--text:#e8e6e3;--muted:#aaaab5;--accent:#e63946;--accent-soft:#ff6b6b;--border:#22243a;--border-strong:#2a2d45;--font-body:'Inter',system-ui,sans-serif;--font-display:'Cormorant Garamond',Georgia,serif;--header-h:72px;--ticker-h:36px;}
+[data-theme="light"]{--bg:#f6f5f0;--surface:#fff;--surface-2:#f1f0ec;--text:#0f0f12;--muted:#6b6b75;--border:#dddce0;--border-strong:#c8c9cf;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh}
+img{display:block;max-width:100%;height:auto;border-radius:10px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(var(--bg-rgb,15,14,25),.92);backdrop-filter:saturate(140%) blur(18px);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:center;height:var(--header-h);gap:1.5rem}
+.logo a{font-family:var(--font-display);font-weight:600;font-size:1.8rem;color:var(--text);letter-spacing:-.03em;text-decoration:none;line-height:1.1}
+.logo span{color:var(--accent);font-style:italic}
+.nav{display:flex;gap:1.2rem;margin-left:auto;margin-right:auto}
+.nav a{color:var(--muted);font-weight:500;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;transition:.2s}
+.nav a:hover,.nav a.active{color:var(--text);text-decoration:none}
+.header-actions{display:flex;align-items:center;gap:.9rem;margin-left:auto}
+.header-actions button{background:transparent;border:1px solid var(--border);color:var(--text);padding:.45rem .85rem;border-radius:30px;font-size:.78rem;font-weight:600;cursor:pointer;transition:.2s}
+.header-actions button:hover{border-color:var(--accent);color:var(--accent)}
+.search-btn{background:transparent;border:none;color:var(--text);font-size:1.1rem;cursor:pointer}
+.theme-btn{font-size:1.1rem;background:none;border:none;color:var(--text);cursor:pointer}
+
+/* Breaking ticker */
+.ticker-wrap{background:var(--surface-2);border-bottom:1px solid var(--border);overflow:hidden;height:var(--ticker-h);display:flex;align-items:center}
+.ticker{display:flex;gap:2.5rem;animation:ticker 30s linear infinite;width:max-content;padding-left:2.5rem;font-size:.78rem;color:var(--muted)}
+.ticker a{color:var(--text);font-weight:600;white-space:nowrap}
+.ticker .dot{color:var(--accent);margin:0 .4rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Hero */
+.hero{padding:3.5rem 0 2.5rem}
+.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:2.5rem;align-items:start}
+.hero-main .hero-img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;margin-bottom:1.2rem;background:linear-gradient(135deg,#1a1b30,#2a2d45)}
+.hero-badge{display:inline-block;background:var(--accent);color:#fff;padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem}
+.hero-main h2{font-family:var(--font-display);font-size:2.8rem;line-height:1.1;margin-bottom:.7rem;letter-spacing:-.02em;color:var(--text)}
+.hero-main .deck{font-size:1.05rem;color:var(--muted);margin-bottom:.9rem;max-width:640px}
+.hero-meta{font-size:.8rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap}
+.hero-meta a{color:var(--accent)}
+.hero-side{display:flex;flex-direction:column;gap:1rem}
+.side-card{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:.2s}
+.side-card:hover{border-color:var(--border-strong)}
+.side-card img{width:120px;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#23243a}
+.side-card h3{font-family:var(--font-display);font-size:1.05rem;line-height:1.25;margin-bottom:.35rem;color:var(--text)}
+.side-card .meta{font-size:.75rem;color:var(--muted);margin-top:.25rem}
+
+/* Sections */
+.section{padding:3rem 0;border-top:1px solid var(--border)}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.section-header h2{font-family:var(--font-display);font-size:1.6rem;letter-spacing:-.02em}
+.section-header a{font-size:.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.section-header a:hover{color:var(--accent)}
+
+/* Cards feed */
+.feed{display:grid;gap:1.25rem}
+.feed-2col{grid-template-columns:1fr 1fr}
+.article-card{display:grid;grid-template-columns:220px 1fr;gap:1.2rem;padding:1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;transition:.2s;align-items:start}
+.article-card:hover{border-color:var(--border-strong)}
+.article-card img{width:220px;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:#23243a}
+.article-card .cat{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.article-card h3{font-family:var(--font-display);font-size:1.15rem;line-height:1.25;margin-bottom:.5rem}
+.article-card p{font-size:.9rem;color:var(--muted);line-height:1.55;margin-bottom:.6rem}
+.article-card .meta-row{display:flex;gap:.8rem;font-size:.75rem;color:var(--muted);flex-wrap:wrap}
+
+/* Trending sidebar */
+.trending{background:var(--surface-2);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.trending h3{font-family:var(--font-display);font-size:1.1rem;margin-bottom:1rem;letter-spacing:-.01em}
+.trend-row{display:flex;align-items:flex-start;gap:.9rem;padding:.7rem 0;border-bottom:1px solid var(--border)}
+.trend-row:last-child{border-bottom:none}
+.trend-num{font-family:var(--font-display);font-size:1.8rem;color:var(--accent);line-height:1;min-width:28px}
+.trend-row h4{font-size:.95rem;line-height:1.25;margin-bottom:.2rem;font-weight:600}
+.trend-row .meta{font-size:.78rem;color:var(--muted)}
+
+/* Category sections */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem;transition:.2s}
+.cat-card:hover{border-color:var(--border-strong)}
+.cat-card img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;margin-bottom:1rem;background:#23243a}
+
+/* Article reading */
+.article-hero{padding-top:2rem}
+.breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:1rem}
+.breadcrumb a{color:var(--muted)}
+.article-hero h1{font-family:var(--font-display);font-size:3rem;line-height:1.08;letter-spacing:-.03em;margin-bottom:.5rem}
+.article-deck{font-size:1.15rem;color:var(--muted);margin-bottom:1.2rem;max-width:720px}
+.author-block{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.author-avatar{width:48px;height:48px;border-radius:50%;background:#2a2d45;object-fit:cover}
+.author-name{font-weight:600;font-size:.95rem;color:var(--text)}
+.author-role{font-size:.75rem;color:var(--muted)}
+.read-time{font-size:.78rem;color:var(--muted);margin-left:auto}
+
+.article-body{max-width:720px;font-size:1.1rem;line-height:1.8;color:#ccc}
+.article-body h2{font-family:var(--font-display);font-size:1.6rem;margin:2.5rem 0 1rem;color:var(--text);line-height:1.2}
+.article-body h3{font-family:var(--font-display);font-size:1.2rem;margin:2rem 0 .7rem;color:var(--text)}
+.article-body p{margin-bottom:1.2rem}
+.article-body blockquote{border-left:3px solid var(--accent);padding-left:1.2rem;margin:1.5rem 0;color:#ddd;font-style:italic;font-family:var(--font-display);font-size:1.15rem}
+.article-body ul{margin:1rem 0 1.2rem 1.2rem;padding-left:1rem}
+.article-body li{margin-bottom:.4rem}
+
+/* Search overlay */
+.search-overlay{position:fixed;inset:0;background:rgba(11,12,21,.85);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding-top:15vh;opacity:0;pointer-events:none;transition:.25s}
+.search-overlay.active{opacity:1;pointer-events:auto}
+.search-overlay .search-box{width:90%;max-width:640px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.search-overlay input{width:100%;background:transparent;border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;font-size:1.2rem;color:var(--text);outline:none;transition:.2s}
+.search-overlay input:focus{border-color:var(--accent)}
+
+/* Footer */
+.site-footer{background:var(--surface-2);border-top:1px solid var(--border);padding:4rem 0 2rem;margin-top:4rem}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem}
+.footer-grid h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:1rem;font-weight:700}
+.footer-grid a{display:block;color:var(--text);font-size:.9rem;margin-bottom:.4rem;text-decoration:none;opacity:.8}
+.footer-grid a:hover{opacity:1;color:var(--accent)}
+.newsletter input{width:100%;padding:.6rem 1rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);margin-bottom:.5rem;font-family:inherit}
+.newsletter button{width:100%;padding:.6rem;border-radius:8px;background:var(--accent);color:#fff;font-weight:700;border:none;cursor:pointer}
+
+/* Mobile */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .nav{display:none}
+  .feed-2col{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .article-body{font-size:1.05rem}
+}
+@media(max-width:560px){
+  .article-card{grid-template-columns:1fr}
+  .article-card img{aspect-ratio:16/10;max-height:240px}
+  .cat-grid{grid-template-columns:1fr}
+  .hero-main h2{font-size:2rem}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo"><a href="#">Daily <span>News</span></a> <a href="privacy.html" style="font-size:.7rem;color:var(--muted);margin-left:.6rem;font-weight:400;">Privacy</a> <a href="terms.html" style="font-size:.7rem;color:var(--muted);margin-left:.4rem;font-weight:400;">Terms</a> <a href="cookies.html" style="font-size:.7rem;color:var(--muted);margin-left:.4rem;font-weight:400;">Cookies</a></div>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#" class="active">Home</a>
+      <a href="#">Latest</a>
+      <a href="#">India</a>
+      <a href="#">World</a>
+      <a href="#">Business</a>
+      <a href="#">Tech</a>
+      <a href="#">Sports</a>
+      <a href="#">Science</a>
+      <a href="#">Lifestyle</a>
+    </nav>
+    <div class="header-actions">
+      <button class="search-btn" onclick="document.getElementById('searchOverlay').classList.add('active');document.getElementById('searchInput').focus();" aria-label="Search">🔍</button>
+      <button onclick="document.body.dataset.theme=document.body.dataset.theme==='light'?'dark':'light';this.textContent=document.body.dataset.theme==='dark'?'☀':'🌙'" class="theme-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+  <div class="ticker-wrap">
+    <div class="ticker" aria-label="Breaking news ticker">
+      <a href="#">🔴 BREAKING — UK government announces prison reform plan</a><span class="dot">•</span>
+      <a href="#">Markets respond to central bank rate signals</a><span class="dot">•</span>
+      <a href="#">New climate report shows faster warming trends</a><span class="dot">•</span>
+      <a href="#">AI research advances in real-time reasoning</a><span class="dot">•</span>
+      <a href="#">Space agency confirms new mission timeline</a><span class="dot">•</span>
+      <a href="#">Global health initiative launches in 40 countries</a>
+      <a href="#">🔴 BREAKING — UK government announces prison reform plan</a><span class="dot">•</span>
+      <a href="#">Markets respond to central bank rate signals</a><span class="dot">•</span>
+      <a href="#">New climate report shows faster warming trends</a><span class="dot">•</span>
+      <a href="#">AI research advances in real-time reasoning</a><span class="dot">•</span>
+      <a href="#">Space agency confirms new mission timeline</a><span class="dot">•</span>
+      <a href="#">Global health initiative launches in 40 countries</a>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay" class="search-overlay" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="search-box">
+    <input id="searchInput" type="text" placeholder="Search news, topics and stories..." aria-label="Search input">
+    <p style="margin-top:.7rem;color:var(--muted);font-size:.85rem;">Press ESC to close</p>
+  </div>
+</div>
+
+<main class="container">
+  <!-- Hero -->
+  <section class="hero" aria-label="Featured story">
+    <div class="hero-grid">
+      <a href="#" class="hero-main" aria-label="Featured article">
+        <img class="hero-img" src="https://image.pollinations.ai/prompt/breaking%20news%20professional%20editorial%20photo%20dark%20cinematic%20lighting?width=1200&height=675&nologo=true&seed=42" alt="Breaking news illustration" loading="eager">
+        <span class="hero-badge">Breaking</span>
+        <h2>Government Announces Major Policy Reform Across Key Sectors</h2>
+        <p class="deck">A sweeping new framework aims to reshape economic, environmental and social policy with implications for millions of citizens. Analysts say the move signals a significant shift in governance strategy.</p>
+        <div class="hero-meta">
+          <span>By Editorial Team</span>
+          <span>• 14 min ago</span>
+          <span>• 8 min read</span>
+        </div>
+      </a>
+      <aside class="hero-side" aria-label="Top stories">
+        <a href="#" class="side-card">
+          <img src="https://image.pollinations.ai/prompt/finance%20business%20professional%20news%20photo?width=480&height=360&nologo=true&seed=7" alt="Finance story" loading="lazy">
+          <h3>Markets Show Unusual Volatility Amid Rate Uncertainty</h3>
+          <div class="meta">Business • 34 min ago</div>
+        </a>
+        <a href="#" class="side-card">
+          <img src="https://image.pollinations.ai/prompt/technology%20science%20lab%20modern?width=480&height=360&nologo=true&seed=12" alt="Technology story" loading="lazy">
+          <h3>New AI System Demonstrates Real-Time Reasoning Breakthrough</h3>
+          <div class="meta">Technology • 1 hr ago</div>
+        </a>
+        <a href="#" class="side-card">
+          <img src="https://image.pollinations.ai/prompt/sports%20competition%20professional%20match%20photo?width=480&height=360&nologo=true&seed=21" alt="Sports story" loading="lazy">
+          <h3>Championship Final Sets New Attendance Record</h3>
+          <div class="meta">Sports • 2 hr ago</div>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Latest News -->
+  <section class="section" aria-label="Latest news" id="latest">
+    <div class="section-header">
+      <h2>Latest News</h2>
+      <a href="#">View all →</a>
+    </div>
+    <div class="feed feed-2col" id="latestFeed">
+      <a href="#" class="article-card" aria-label="News article">
+        <img src="https://image.pollinations.ai/prompt/politics%20parliament%20professional%20news%20photo?width=880&height=660&nologo=true&seed=3" alt="Politics" loading="lazy">
+        <div>
+          <span class="cat">Politics</span>
+          <h3>Keir Starmer Announces Standing Down as MP</h3>
+          <p>A major development in UK parliamentary politics as the opposition leader confirms plans to step down, reshaping the political landscape ahead of upcoming elections.</p>
+          <div class="meta-row"><span>BBC News</span><span>• 2 hr ago</span><span>• 6 min read</span></div>
+        </div>
+      </a>
+      <a href="#" class="article-card" aria-label="News article">
+        <img src="https://image.pollinations.ai/prompt/finance%20market%20bonds%20professional%20news%20photo?width=880&height=660&nologo=true&seed=9" alt="Business" loading="lazy">
+        <div>
+          <span class="cat">Business</span>
+          <h3>Global Bond Sell-Off Puts Investors on Edge</h3>
+          <p>Markets react sharply to shifting central bank signals, with bond yields rising across major economies and portfolio adjustments accelerating worldwide.</p>
+          <div class="meta-row"><span>NYT • Top Stories</span><span>• 3 hr ago</span><span>• 5 min read</span></div>
+        </div>
+      </a>
+      <a href="#" class="article-card" aria-label="News article">
+        <img src="https://image.pollinations.ai/prompt/weather%20climate%20sun%20professional%20news%20photo?width=880&height=660&nologo=true&seed=15" alt="Science" loading="lazy">
+        <div>
+          <span class="cat">Science</span>
+          <h3>UK's Hottest Summer Confirmed by Met Office</h3>
+          <p>Record-breaking temperatures across the country have been officially verified, with significant implications for public health and infrastructure planning.</p>
+          <div class="meta-row"><span>BBC News</span><span>• 4 hr ago</span><span>• 4 min read</span></div>
+        </div>
+      </a>
+      <a href="#" class="article-card" aria-label="News article">
+        <img src="https://image.pollinations.ai/prompt/technology%20ai%20computer%20lab%20professional%20news%20photo?width=880&height=660&nologo=true&seed=20" alt="Technology" loading="lazy">
+        <div>
+          <span class="cat">Technology</span>
+          <h3>AI System Shows Real-Time Reasoning Breakthrough</h3>
+          <p>A new model demonstrates the ability to solve complex multi-step problems in real time, opening potential applications in science, engineering and research.</p>
+          <div class="meta-row"><span>Tech Daily</span><span>• 5 hr ago</span><span>• 7 min read</span></div>
+        </div>
+      </a>
+      <a href="#" class="article-card" aria-label="News article">
+        <img src="https://image.pollinations.ai/prompt/sports%20stadium%20championship%20crowd%20professional%20photo?width=880&height=660&nologo=true&seed=25" alt="Sports" loading="lazy">
+        <div>
+          <span class="cat">Sports</span>
+          <h3>Championship Final Attracts Record Attendance</h3>
+          <p>The season's biggest sporting event drew the largest crowd in the competition's history, with organizers announcing expanded capacity for next year.</p>
+          <div class="meta-row"><span>Sports Wire</span><span>• 6 hr ago</span><span>• 3 min read</span></div>
+        </div>
+      </a>
+      <a href="#" class="article-card" aria-label="News article">
+        <img src="https://image.pollinations.ai/prompt/world%20map%20global%20news%20professional%20photo?width=880&height=660&nologo=true&seed=30" alt="World" loading="lazy">
+        <div>
+          <span class="cat">World</span>
+          <h3>Two Global Summits Offer Competing Visions for Development</h3>
+          <p>Leaders from major economies gathered in parallel forums, presenting contrasting approaches to trade, climate cooperation and international security.</p>
+          <div class="meta-row"><span>Global Wire</span><span>• 7 hr ago</span><span>• 6 min read</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="container" style="display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:start;padding-top:3rem;">
+    <!-- More categories -->
+    <div>
+      <section class="section" aria-label="Category: Technology">
+        <div class="section-header"><h2>Technology</h2><a href="#">View all →</a></div>
+        <div class="cat-grid">
+          <a href="#" class="cat-card" aria-label="Technology article">
+            <img src="https://image.pollinations.ai/prompt/technology%20innovation%20lab%20modern%20news?width=600&height=400&nologo=true&seed=33" alt="Technology" loading="lazy">
+            <h3>Real-Time AI Reasoning Opens New Research Paths</h3>
+            <p>Scientists explore applications of the new reasoning model in multi-step scientific computation and real-time analysis.</p>
+            <div class="meta-row"><span>Technology • 1 hr ago</span></div>
+          </a>
+          <a href="#" class="cat-card" aria-label="Technology article">
+            <img src="https://image.pollinations.ai/prompt/computer%20chip%20semiconductor%20technology%20news?width=600&height=400&nologo=true&seed=34" alt="Semiconductor" loading="lazy">
+            <h3>New Chip Architecture Reduces Energy Consumption</h3>
+            <p>A redesigned processor architecture shows significant efficiency gains for data centers and mobile devices alike.</p>
+            <div class="meta-row"><span>Technology • 3 hr ago</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Category: Business">
+        <div class="section-header"><h2>Business</h2><a href="#">View all →</a></div>
+        <a href="#" class="article-card" aria-label="Business article">
+          <img src="https://image.pollinations.ai/prompt/business%20finance%20market%20professional%20photo?width=880&height=660&nologo=true&seed=40" alt="Business" loading="lazy">
+          <div>
+            <span class="cat">Business</span>
+            <h3>Investors Adjust Portfolios Amid Bond Market Shifts</h3>
+            <p>Portfolio managers are rebalancing allocations in response to rising yields and shifting interest rate expectations.</p>
+            <div class="meta-row"><span>Financial Wire • 30 min ago</span></div>
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <!-- Sidebar -->
+    <aside aria-label="Trending and related">
+      <section class="trending" aria-label="Trending now">
+        <h3>Trending Now</h3>
+        <a href="#" class="trend-row">
+          <span class="trend-num">01</span>
+          <div><h4>Government Announces Major Policy Reform</h4><div class="meta">Politics • 2 hr ago</div></div>
+        </a>
+        <a href="#" class="trend-row">
+          <span class="trend-num">02</span>
+          <div><h4>Markets Show Unusual Volatility</h4><div class="meta">Business • 34 min ago</div></div>
+        </a>
+        <a href="#" class="trend-row">
+          <span class="trend-num">03</span>
+          <div><h4>New AI System Demonstrates Breakthrough</h4><div class="meta">Technology • 1 hr ago</div></div>
+        </a>
+        <a href="#" class="trend-row">
+          <span class="trend-num">04</span>
+          <div><h4>Championship Final Attracts Record Crowd</h4><div class="meta">Sports • 2 hr ago</div></div>
+        </a>
+        <a href="#" class="trend-row">
+          <span class="trend-num">05</span>
+          <div><h4>Climate Report Confirms Faster Warming</h4><div class="meta">Science • 4 hr ago</div></div>
+        </a>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Categories -->
+  <section class="section" aria-label="Category sections">
+    <div class="section-header"><h2>More Sections</h2></div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card" aria-label="India section">
+        <img src="https://image.pollinations.ai/prompt/india%20news%20professional%20editorial%20photo?width=600&height=400&nologo=true&seed=50" alt="India" loading="lazy">
+        <h3>India</h3>
+        <p>National politics, policy updates and regional news.</p>
+      </a>
+      <a href="#" class="cat-card" aria-label="World section">
+        <img src="https://image.pollinations.ai/prompt/world%20global%20news%20professional%20photo?width=600&height=400&nologo=true&seed=51" alt="World" loading="lazy">
+        <h3>World</h3>
+        <p>International affairs, diplomacy and global events.</p>
+      </a>
+      <a href="#" class="cat-card" aria-label="Science section">
+        <img src="https://image.pollinations.ai/prompt/science%20space%20research%20professional%20photo?width=600&height=400&nologo=true&seed=52" alt="Science" loading="lazy">
+        <h3>Science</h3>
+        <p>Space exploration, research breakthroughs and climate.</p>
+      </a>
+      <a href="#" class="cat-card" aria-label="Entertainment section">
+        <img src="https://image.pollinations.ai/prompt/entertainment%20film%20cinema%20professional%20photo?width=600&height=400&nologo=true&seed=53" alt="Entertainment" loading="lazy">
+        <h3>Entertainment</h3>
+        <p>Film, television, culture and celebrity news.</p>
+      </a>
+      <a href="#" class="cat-card" aria-label="Lifestyle section">
+        <img src="https://image.pollinations.ai/prompt/lifestyle%20travel%20food%20health%20professional%20photo?width=600&height=400&nologo=true&seed=54" alt="Lifestyle" loading="lazy">
+        <h3>Lifestyle</h3>
+        <p>Health, travel, food and everyday living stories.</p>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>News</h4>
+      <a href="#">Latest</a>
+      <a href="#">India</a>
+      <a href="#">World</a>
+      <a href="#">Business</a>
+      <a href="#">Technology</a>
+      <a href="#">Sports</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Editorial Policy</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <a href="#">X / Twitter</a>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+    <div class="newsletter">
+      <h4>Newsletter</h4>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem;">Get the day's biggest stories delivered daily.</p>
+      <form onsubmit="event.preventDefault();this.innerHTML='<p style=\'font-size:.85rem;color:var(--accent);font-weight:600;\'>Subscribed ✓</p>';">
+        <label for="email" style="display:none">Email</label>
+        <input id="email" type="email" placeholder="your@email.com" aria-label="Email for newsletter" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="container" style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;">
+    <p>© 2026 Daily News. All rights reserved.</p>
+    <p>Built with GitHub Actions + AI content generation.</p>
+  </div>
+</footer>
+
+<script>
+// Auto-populate articles from site/news-feed.json if served; otherwise use embedded fallback
+fetch('news-feed.json').then(r=>r.json()).catch(()=>null).then(data=>{
+  if(!data) return;
+  const container = document.getElementById('latestFeed');
+  if(!container) return;
+  const cards = data.map(a=>\`<a href="#" class="article-card" aria-label="News article">
+    <img src="${a.img || 'https://image.pollinations.ai/prompt/news%20editorial%20professional?width=880&height=660&nologo=true&seed=1'}" alt="${a.slug}" loading="lazy">
+    <div><span class="cat">News</span><h3>${a.title}</h3><p>${a.desc}</p><div class="meta-row"><span>${a.source}</span><span>• ${a.date}</span></div></div>
+  </a>\`).join('');
+  container.innerHTML = cards;
+}).catch(e=>console.log('Feed load skipped (static mode):',e));
+</script>
+
+</body>
+</html>
